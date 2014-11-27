@@ -18,6 +18,6 @@ module.exports = function (gulp, config) {
     pkg.scripts[t] = 'gulp '+tasks[t].name;
   });
 
-  fs.writeFileSync(config.path || 'package.json', JSON.stringify(pkg, null, indent));
+  fs.writeFileSync(config.path || 'package.json', JSON.stringify(pkg, null, indent) + '\n');
 
 };
