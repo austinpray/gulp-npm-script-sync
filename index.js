@@ -1,4 +1,5 @@
 var fs = require('fs');
+var detectIndent = require('detect-indent');
 
 module.exports = function (gulp, config) { 
   config = config || {};
@@ -6,7 +7,9 @@ module.exports = function (gulp, config) {
     throw new Error("Gulp Undefined");
   }
 
-  var pkg = JSON.parse(fs.readFileSync(config.path || 'package.json'));
+  var file = fs.readFileSync(config.path || 'package.json', 'utf-8');
+  var pkg = JSON.parse(file);
+  var indent = detectIndent(file).indent || '  ';
   var tasks = gulp.tasks;
 
   pkg.scripts = pkg.scripts || {};
@@ -15,6 +18,6 @@ module.exports = function (gulp, config) {
     pkg.scripts[t] = 'gulp '+tasks[t].name;
   });
 
-  fs.writeFileSync(config.path || 'package.json', JSON.stringify(pkg));
+  fs.writeFileSync(config.path || 'package.json', JSON.stringify(pkg, null, indent));
 
 };

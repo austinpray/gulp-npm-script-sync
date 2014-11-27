@@ -23,5 +23,8 @@
     "chai": "*",
     "mkdirp": "^0.5.0",
     "mocha": "*"
+  },
+  "dependencies": {
+    "detect-indent": "^3.0.0"
   }
 }
