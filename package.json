@@ -21,6 +21,7 @@
   "homepage": "https://github.com/austinpray/gulp-npm-script-sync",
   "devDependencies": {
     "chai": "*",
+    "gulp": "*",
     "mkdirp": "^0.5.0",
     "mocha": "*"
   },
