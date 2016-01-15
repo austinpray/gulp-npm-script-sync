@@ -10,7 +10,13 @@ module.exports = function (gulp, config) {
   var file = fs.readFileSync(config.path || 'package.json', 'utf-8');
   var pkg = JSON.parse(file);
   var indent = detectIndent(file).indent || '  ';
-  var tasks = gulp.tasks;
+  if (typeof gulp.tasks === 'object') {
+    var tasks = gulp.tasks;
+  } else if (typeof gulp.registry === 'function') {
+    var tasks = gulp.registry().tasks();
+  } else {
+    throw new Error('Could not find gulp tasks');
+  }
 
   pkg.scripts = pkg.scripts || {};
   
