@@ -1,6 +1,6 @@
 {
   "name": "gulp-npm-script-sync",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "gulp-npm-script-sync ====================",
   "main": "index.js",
   "directories": {
