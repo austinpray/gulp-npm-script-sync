@@ -21,7 +21,7 @@ module.exports = function (gulp, config) {
   pkg.scripts = pkg.scripts || {};
   
   Object.keys(tasks).forEach(function (t) {
-    pkg.scripts[t] = 'gulp '+tasks[t].name;
+    pkg.scripts[t] = 'gulp ' + tasks[t].displayName || tasks[t].name;
   });
 
   fs.writeFileSync(config.path || 'package.json', JSON.stringify(pkg, null, indent) + '\n');
