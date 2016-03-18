@@ -21,3 +21,16 @@ var sync = require('gulp-npm-script-sync');
 sync(gulp);
 ```
 
+Using the configurations:
+```javascript
+// gulpfile.js
+var gulp = require('gulp');
+var sync = require('gulp-npm-script-sync');
+
+// your gulpfile contents
+
+sync(gulp, {
+  path: 'path/to/package.json',
+  excluded: ['task1', 'task2']
+});
+```

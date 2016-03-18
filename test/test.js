@@ -19,6 +19,7 @@ function addTasks(done) {
   gulp.task('foo', fn);
   gulp.task('bar', fn);
   gulp.task('baz', fn);
+  gulp.task('excluded', fn);
 }
 function removeTasks() {
   gulp.reset();
@@ -37,11 +38,26 @@ describe('Adding properties to package.json', function(){
     assert.equal(f.scripts.foo, 'gulp foo');
     assert.equal(f.scripts.bar, 'gulp bar');
     assert.equal(f.scripts.baz, 'gulp baz');
+    assert.equal(f.scripts.excluded, 'gulp excluded');
+  });
+  it('should exclude the gulp tasks from scripts', function () {
+    sync(gulp, {
+      path: 'test/tmp/package.json',
+      excluded: ['excluded']
+    });
+    var f = JSON.parse(fs.readFileSync('test/tmp/package.json'));
+    assert.equal(f.scripts.foo, 'gulp foo');
+    assert.equal(f.scripts.bar, 'gulp bar');
+    assert.equal(f.scripts.baz, 'gulp baz');
+    assert.isUndefined(f.scripts.excluded, 'excluded should be undefined');
   });
 });
 
 describe('error handling', function () {
   it('should error if gulp is undefined', function () {
     a.throws(function () {sync();}, Error, "Error thrown");
+  });
+  it('should error if config.excludes is not an array', function () {
+    a.throws(function () {sync(gulp, {excluded: ''});}, Error, "Error thrown");
   });
 });
